@@ -212,13 +212,18 @@
            for (var i = 0; i < data.experience.length; i++)
                 $('#resume').append('<h2>' + data.experience[i] + '</h2>');
        });
+       $.getJSON('./rs/blog', 
+       function(data) {
+           for (var i = 0; i < data.length; i++)
+                $('#blog').append('<p>' + data[i].text + '</p>');
+       });
     });
 </script>
 </head>
 <body>
 
  <section class='container'>
-     <div class="col-md-6">Some Information About Me</div>
+     <div class="col-md-6" id="blog">Some Information About Me</div>
      <div class="col-md-6" id="resume">
           
         </div>
