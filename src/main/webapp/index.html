@@ -208,7 +208,9 @@
     $(document).ready(function () {
        $.getJSON('./rs/resume', {},
        function(data) {
-           $('#resume').append(data);
+           $('#resume').append('<h1>' + data.name + '</h1>');
+           for (var i = 0; i < data.experience.length; i++)
+                $('#resume').append('<h2>' + data.experience[i] + '</h2>');
        });
     });
 </script>
