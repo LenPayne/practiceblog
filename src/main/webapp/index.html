@@ -206,7 +206,7 @@
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-       $.getJSON('./rs/resume', {},
+       $.getJSON('./rs/resume', 
        function(data) {
            $('#resume').append('<h1>' + data.name + '</h1>');
            for (var i = 0; i < data.experience.length; i++)
