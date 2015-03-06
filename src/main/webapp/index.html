@@ -215,7 +215,7 @@
                 var getBlog = function() {$.getJSON('./rs/blog',
                         function(data) {
                             for (var i = 0; i < data.length; i++)
-                                $('#blog').append('<p>' + data[i].text + '</p>');
+                                $('#blog').append('<h3>'+data[i].title+'</h3><p><small>'+data[i].time+'</small></h5><p>' + data[i].text + '</p>');
                         });
                         };
                 getBlog();
