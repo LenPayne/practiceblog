@@ -16,12 +16,12 @@
                             for (var i = 0; i < data.experience.length; i++)
                                 $('#resume').append('<h2>' + data.experience[i] + '</h2>');
                         });
-                 function getBlog(data) {
+                 var getBlog = function(data) {
                                 $('#blog').html('');
                                 for (var i = 0; i < data.length; i++)
                                     $('#blog').append('<h3>' + data[i].title + '</h3><p><small>' + data[i].time + '</small></h5><p>' + data[i].text + '</p>');
                             };                            
-                $.getJSON('./rs/blog', getBlog(data));                
+                $.getJSON('./rs/blog', getBlog);                
                 $('#send').click(function() {
                     $.ajax({
                         url: "./rs/blog",
@@ -30,7 +30,7 @@
                         data: JSON.stringify({"title": $("#title").val(),
                             "text": $("#text").val()}),
                         method: "post",
-                        success: getBlog(data)
+                        success: getBlog
                     })
                 });
             });
