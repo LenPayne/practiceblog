@@ -17,15 +17,6 @@
                             for (var i = 0; i < data.experience.length; i++)
                                 $('#resume').append('<h2>' + data.experience[i] + '</h2>');
                         });
-                // Configure a Callback to Update the Blog
-                var getBlog = function(data) {
-                    $('#blog').html('');
-                    for (var i = 0; i < data.length; i++)
-                        $('#blog').append('<h3>' + data[i].title + '</h3><p><small>' + 
-                            data[i].time + '</small></h5><p>' + data[i].text + '</p>' +
-                            '<p><button class="btn btn-default" onclick="doDelete('+ 
-                            data[i].id + ')">Delete</button></p>');
-                };                            
                 // Go Grab the Blog Data and Place it on the Page
                 $.getJSON('./rs/blog', getBlog);                
                 // Configure an On-Click Listener to Update the Form
@@ -39,18 +30,27 @@
                         method: "post",
                         success: getBlog
                     })
-                });
-                // Perform a Deletion on the DB
-                var doDelete = function(id) {
-                    $.ajax({
-                        url: "./rs/blog/" + id,
-                        dataType: "json",
-                        contentType: 'application/json; charset=UTF-8',                        
-                        method: "delete",
-                        success: getBlog
-                    })
-                }
+                });                
             });
+            // Configure a Callback to Update the Blog
+            var getBlog = function(data) {
+                $('#blog').html('');
+                for (var i = 0; i < data.length; i++)
+                    $('#blog').append('<h3>' + data[i].title + '</h3><p><small>' + 
+                        data[i].time + '</small></h5><p>' + data[i].text + '</p>' +
+                        '<p><button class="btn btn-default" onclick="doDelete('+ 
+                        data[i].id + ')">Delete</button></p>');
+            };                            
+            // Perform a Deletion on the DB
+            var doDelete = function(id) {
+                $.ajax({
+                    url: "./rs/blog/" + id,
+                    dataType: "json",
+                    contentType: 'application/json; charset=UTF-8',                        
+                    method: "delete",
+                    success: getBlog
+                })
+            }
         </script>
     </head>
     <body>
