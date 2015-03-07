@@ -29,10 +29,10 @@ public class Resume {
     @GET
     public String get() {
         JsonObject json = Json.createObjectBuilder()
-                .add("name", "Ama")
+                .add("name", "Some Guy")
                 .add("experience", Json.createArrayBuilder()
-                    .add("Some Job")
-                    .add("Some Other Job")
+                    .add("May 2011 - Jun 2015 -- Some Job")
+                    .add("July 2015 - Sept 2016 -- Some Other Job")
                     .build()
                 ).build();
         return json.toString();
