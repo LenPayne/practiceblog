@@ -222,6 +222,7 @@
                 $('#send').click(function() {
                     $.ajax({
                     url: "./rs/blog",
+                    dataType: "json",
                     data: { "title" : $("#title").val(),
                             "text" : $("#text").val() },
                     method: "POST",
