@@ -22,7 +22,9 @@
                     $('#blog').html('');
                     for (var i = 0; i < data.length; i++)
                         $('#blog').append('<h3>' + data[i].title + '</h3><p><small>' + 
-                            data[i].time + '</small></h5><p>' + data[i].text + '</p>');
+                            data[i].time + '</small></h5><p>' + data[i].text + '</p>' +
+                            '<p><button class="btn btn-default" onclick="doDelete('+ 
+                            data[i].id + ')">Delete</button></p>');
                 };                            
                 // Go Grab the Blog Data and Place it on the Page
                 $.getJSON('./rs/blog', getBlog);                
@@ -38,6 +40,16 @@
                         success: getBlog
                     })
                 });
+                // Perform a Deletion on the DB
+                var doDelete = function(id) {
+                    $.ajax({
+                        url: "./rs/blog/" + id,
+                        dataType: "json",
+                        contentType: 'application/json; charset=UTF-8',                        
+                        method: "delete",
+                        success: getBlog
+                    })
+                }
             });
         </script>
     </head>

@@ -22,9 +22,12 @@ import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 /**
  *
@@ -67,6 +70,40 @@ public class Blog {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO blog (title, text, time) VALUES (?, ?, NOW())");
             pstmt.setString(1, title);
             pstmt.setString(2, text);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Blog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return get();
+    }
+    
+    @PUT
+    @Path("{id}")
+    public String put(@PathParam("id") int id, String str) {
+        try {
+            JsonObject json = Json.createReader(new StringReader(str)).readObject();
+            String title = json.getString("title");
+            String text = json.getString("text");
+            
+            Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE blog SET title=?, text=? WHERE id=?");
+            pstmt.setString(1, title);
+            pstmt.setString(2, text);
+            pstmt.setInt(3, id);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Blog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return get();
+    }
+    
+    @DELETE
+    @Path("{id]")
+    public String delete(@PathParam("id") int id) {
+        try {
+            Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM blog WHERE id=?");
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Blog.class.getName()).log(Level.SEVERE, null, ex);
