@@ -59,6 +59,29 @@ public class Blog {
         return result;
     }
     
+    @GET
+    @Path("{id}")
+    public String get(@PathParam("id") int id) {
+        String result = "";
+        try {
+            Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM blog WHERE id = ?");
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            JsonObject json = Json.createObjectBuilder()
+                    .add("title", rs.getString("title"))
+                    .add("text", rs.getString("text"))
+                    .add("time", rs.getString("time"))
+                    .add("id", rs.getInt("id"))
+                    .build();                           
+            result = json.toString();
+        } catch (SQLException ex) {
+            Logger.getLogger(Blog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     @POST
     public String post(String str) {
         try {

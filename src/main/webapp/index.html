@@ -29,7 +29,7 @@
                             "text": $("#text").val()}),
                         method: "post",
                         success: getBlog
-                    })
+                    });
                 });                
             });
             // Configure a Callback to Update the Blog
@@ -39,7 +39,8 @@
                     $('#blog').append('<h3>' + data[i].title + '</h3><p><small>' + 
                         data[i].time + '</small></h5><p>' + data[i].text + '</p>' +
                         '<p><button class="btn btn-default" onclick="doDelete('+ 
-                        data[i].id + ')">Delete</button></p>');
+                        data[i].id + ')">Delete</button><button class="btn btn-default" onclick="stageUpdate('+ 
+                        data[i].id + ')">Edit</button></p>');
             };                            
             // Perform a Deletion on the DB
             var doDelete = function(id) {
@@ -49,8 +50,30 @@
                     contentType: 'application/json; charset=UTF-8',                        
                     method: "delete",
                     success: getBlog
-                })
-            }
+                });
+            };
+            // Stage an Update on the DB
+            var stageUpdate = function(id) {
+                $.getJSON('./blog/' + id, function(data) {
+                    $('#title').val(data.title);
+                    $('#text').val(data.text);
+                    $('#update').removeClass('invisible');
+                    $('#update').click(function() {
+                        $.ajax({
+                            url: "./rs/blog/" + id,
+                            dataType: "json",
+                            contentType: 'application/json; charset=UTF-8',
+                            data: JSON.stringify({"title": $("#title").val(),
+                                "text": $("#text").val()}),
+                            method: "put",
+                            success: function(data) {
+                                getBlog(data);
+                                $('#update').addClass('invisible');
+                            }
+                        });    
+                    });
+                });
+            };
         </script>
     </head>
     <body>
@@ -59,10 +82,11 @@
                 <h1>Blog</h1>
                 <div class="form-group">
                     <label for="title">Title:</label>
-                    <input id="title" class="form-control"/></p>
+                    <input id="title" class="form-control"/>
                 </div>
                 <textarea id="text" rows="3" class="form-control"></textarea>
-                <button id="send" class="btn btn-default">Send</button>
+                <button id="send" class="btn btn-default">Send</button>                
+                <button id="update" class="btn btn-default invisible">Update</button>                
                 <div id="blog"></div>
             </div>
             <div class="col-md-4" id="resume"></div>            
