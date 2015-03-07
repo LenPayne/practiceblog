@@ -29,8 +29,8 @@ public class Wiper {
     }
     
     public void wipeIfOld() {
-        Date fiveMinutesAgo = new Date(new Date().getTime() - 5 * 60 * 1000);
-        if (lastUpdate.before(fiveMinutesAgo)) {
+        Date twoMinutesAgo = new Date(new Date().getTime() - (2 * 60 * 1000));
+        if (lastUpdate.before(twoMinutesAgo)) {
             try {
                 Connection conn = getConnection();
                 Statement stmt = conn.createStatement();            
