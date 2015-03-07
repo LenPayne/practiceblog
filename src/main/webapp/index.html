@@ -224,9 +224,9 @@
                     url: "./rs/blog",
                     dataType: "json",
                     contentType: 'application/json; charset=UTF-8',
-                    data: { "title" : $("#title").val(),
-                            "text" : $("#text").val() },
-                    method: "POST",
+                    data: JSON.Stringify({ "title" : $("#title").val(),
+                            "text" : $("#text").val() }),
+                    method: "post",
                     success: getBlog()
                 })
             });
