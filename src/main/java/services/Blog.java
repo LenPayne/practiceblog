@@ -98,7 +98,7 @@ public class Blog {
     }
     
     @DELETE
-    @Path("{id]")
+    @Path("{id}")
     public String delete(@PathParam("id") int id) {
         try {
             Connection conn = getConnection();
