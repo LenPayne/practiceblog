@@ -35,8 +35,13 @@ import javax.ws.rs.PathParam;
  */
 @Path("/blog")
 public class Blog {
+    // Exists to wipe the Blog table if the DB wasn't updated in the last five minutes
+    Wiper wiper = new Wiper();
     @GET
     public String get() {
+        // Wipes out the Blog table if the DB is older than 5 minutes
+        wiper.wipeIfOld();
+                
         String result = "";
         try {
             Connection conn = getConnection();
