@@ -1,3 +1,4 @@
-The OpenShift `jbossas` cartridge documentation can be found at:
+# Practice Blog Based on OpenShift Wildfly Cartridge with MySQL
 
-https://github.com/openshift/origin-server/tree/master/cartridges/openshift-origin-cartridge-jbossas/README.md
+This is an end-to-end sample performing CRUD with jQuery and JAX-RS. It 
+functions as a blog, with a bit of a hard-coded resume on the side.
