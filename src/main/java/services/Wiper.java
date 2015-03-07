@@ -30,8 +30,10 @@ public class Wiper {
     
     public void wipeIfOld() {
         Date twoMinutesAgo = new Date(new Date().getTime() - (2 * 60 * 1000));
+        System.out.println("Seeing if " + lastUpdate + " is before " + twoMinutesAgo);
         if (lastUpdate.before(twoMinutesAgo)) {
             try {
+                System.out.println("Database Inactive - Wiping Clean");
                 Connection conn = getConnection();
                 Statement stmt = conn.createStatement();            
                 stmt.executeUpdate("TRUNCATE blog");
