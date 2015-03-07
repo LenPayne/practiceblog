@@ -18,17 +18,17 @@ import javax.enterprise.context.ApplicationScoped;
  */
 @ApplicationScoped
 public class Wiper {
-    Date lastUpdate = new Date();
+    static Date lastUpdate = new Date();
 
-    public Date getLastUpdate() {
+    static public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    static public void setLastUpdate(Date date) {
+        lastUpdate = date;
     }
     
-    public void wipeIfOld() {
+    static public void wipeIfOld() {
         Date twoMinutesAgo = new Date(new Date().getTime() - (2 * 60 * 1000));
         System.out.println("Seeing if " + lastUpdate + " is before " + twoMinutesAgo);
         if (lastUpdate.before(twoMinutesAgo)) {
@@ -44,7 +44,7 @@ public class Wiper {
         lastUpdate = new Date();
     }
     
-    private Connection getConnection() {
+    static private Connection getConnection() {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
