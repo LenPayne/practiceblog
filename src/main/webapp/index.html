@@ -41,6 +41,8 @@
                         '<p><button class="btn btn-default" onclick="doDelete('+ 
                         data[i].id + ')">Delete</button><button class="btn btn-default" onclick="stageUpdate('+ 
                         data[i].id + ')">Edit</button></p>');
+                $('#text').val('');
+                $('#title').val('');
             };                            
             // Perform a Deletion on the DB
             var doDelete = function(id) {
