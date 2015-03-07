@@ -54,7 +54,7 @@
             };
             // Stage an Update on the DB
             var stageUpdate = function(id) {
-                $.getJSON('./blog/' + id, function(data) {
+                $.getJSON('./rs/blog/' + id, function(data) {
                     $('#title').val(data.title);
                     $('#text').val(data.text);
                     $('#update').removeClass('invisible');
