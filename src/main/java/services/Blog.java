@@ -56,7 +56,7 @@ public class Blog {
     }
     
     @POST
-    public void post(String str) throws ClassNotFoundException, SQLException {
+    public String post(String str) throws ClassNotFoundException, SQLException {
         JsonObject json = Json.createReader(new StringReader(str)).readObject();
         String title = json.getString("title");
         String text = json.getString("text");
@@ -72,6 +72,8 @@ public class Blog {
         pstmt.setString(1, title);
         pstmt.setString(2, text);
         pstmt.executeUpdate();
+        
+        return get();
     }
             
 }
