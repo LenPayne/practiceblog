@@ -16,46 +16,38 @@
                             for (var i = 0; i < data.experience.length; i++)
                                 $('#resume').append('<h2>' + data.experience[i] + '</h2>');
                         });
-                var getBlog = function() {$.getJSON('./rs/blog',
-                        function(data) {
-                            $('#blog').html('');
-                            for (var i = 0; i < data.length; i++)
-                                $('#blog').append('<h3>'+data[i].title+'</h3><p><small>'+data[i].time+'</small></h5><p>' + data[i].text + '</p>');
-                        });
-                        };
+                var getBlog = function() {
+                    $.getJSON('./rs/blog',
+                            function(data) {
+                                $('#blog').html('');
+                                for (var i = 0; i < data.length; i++)
+                                    $('#blog').append('<h3>' + data[i].title + '</h3><p><small>' + data[i].time + '</small></h5><p>' + data[i].text + '</p>');
+                            });
+                };
                 getBlog();
                 $('#send').click(function() {
                     $.ajax({
-                    url: "./rs/blog",
-                    dataType: "json",
-                    contentType: 'application/json; charset=UTF-8',
-                    data: JSON.stringify({ "title" : $("#title").val(),
-                            "text" : $("#text").val() }),
-                    method: "post",
-                    success: getBlog()
-                })
-            });
+                        url: "./rs/blog",
+                        dataType: "json",
+                        contentType: 'application/json; charset=UTF-8',
+                        data: JSON.stringify({"title": $("#title").val(),
+                            "text": $("#text").val()}),
+                        method: "post",
+                        success: getBlog()
+                    })
+                });
             });
         </script>
     </head>
     <body>
-
         <section class='container'>
-            <div class="col-md-6" id="blog">Some Information About Me
+            <div class="col-md-8">Some Information About Me
                 <p>Title: <input id="title" /></p>
                 <textarea id="text"></textarea>
                 <button id="send">Send</button>
+                <div id="blog"></div>
             </div>
-            <div class="col-md-6" id="resume">
-
-
-            </div>
-
-            <footer>
-                <div class="logo"><a href="https://www.openshift.com/"></a></div>
-            </footer>
+            <div class="col-md-4" id="resume"></div>            
         </section>
-
-
     </body>
 </html>
